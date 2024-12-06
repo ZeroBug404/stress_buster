@@ -8,7 +8,6 @@ const chatSchema = new Schema<IChat>({
   // User information
   userId: {
     type: String,
-    required: true,
   },
   // Chat details
   timestamp: {
@@ -17,11 +16,9 @@ const chatSchema = new Schema<IChat>({
   },
   prompt: {
     type: String,
-    required: true,
   },
   response: {
     type: String,
-    required: true,
   },
 })
 

@@ -17,7 +17,6 @@ const connectWithChatBot = async (
 ): Promise<void> => {
   try {
     if (req.user === undefined) {
-      
       return
     }
     const foundHist = await chatHistModel
@@ -25,6 +24,7 @@ const connectWithChatBot = async (
       .sort({ timestamp: 1 })
 
     // console.log(foundHist);
+    console.log(req.body)
 
     type GeminiChatHistory = {
       role: 'user' | 'model'
@@ -83,6 +83,8 @@ const connectWithChatBot = async (
         try {
           data = JSON.parse(data.toString())
 
+          console.log(data)
+
           if (data?.type === 'client:chathist') {
             wss.send(
               JSON.stringify({ type: 'server:chathist', data: foundHist })
@@ -97,6 +99,8 @@ const connectWithChatBot = async (
             const result = await chat.sendMessageStream(data.prompt)
             let respText = ''
             wss.send(JSON.stringify({ type: 'server:response:start' }))
+
+            console.log(result)
 
             for await (const chunk of result.stream) {
               const chunkText = chunk.text()

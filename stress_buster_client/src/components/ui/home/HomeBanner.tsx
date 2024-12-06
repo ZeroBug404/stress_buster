@@ -2,6 +2,7 @@ import Wrapper from "@/components/shared/Wrapper";
 import { Button } from "../button";
 
 import bannerImg2 from "@/assets/bannerImg2.jpg";
+import { Link } from "react-router-dom";
 
 const HomeBanner = () => {
   return (
@@ -22,10 +23,12 @@ const HomeBanner = () => {
 
           {/* button section  */}
           <div className="buttonSection">
-            <Button className=" text-xl bg-prime100 hover:bg-prime100   ">
-              Chat with us...
-              <div className=" h-[.8rem] w-[.08rem] bg-gray-100 animate-ping rounded-md"></div>
-            </Button>
+            <Link to={"/message"}>
+              <Button className=" text-xl bg-prime100 hover:bg-prime100   ">
+                Chat with us...
+                <div className=" h-[.8rem] w-[.08rem] bg-gray-100 animate-ping rounded-md"></div>
+              </Button>
+            </Link>
           </div>
 
           {/*  */}

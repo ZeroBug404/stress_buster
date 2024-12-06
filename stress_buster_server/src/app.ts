@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: true }))
 dbConnect()
 
 // Application routes
-app.use('/api/v1/', routes)
+app.use('/api/v1', routes)
 
 //Welcome route
 app.get('/', async (req: Request, res: Response, next: NextFunction) => {
