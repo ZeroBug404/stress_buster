@@ -1,16 +1,56 @@
 import { ReimentForm, ReimentInput, ReimentSelect } from "@/components/form";
 import Wrapper from "@/components/shared/Wrapper";
 import { Button } from "@/components/ui/button";
+import { useSignUpMutation } from "@/redux/features/auth/auth.api";
 import registerUserSchema from "@/schemas/CreateUser.schema";
 import { GenderOptions } from "@/utils/Constants";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FieldValues } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+  const [signUp, { isloading }] = useSignUpMutation();
+
   // ! functin for register
-  const handleRegister = (data: FieldValues) => {
+  const handleRegister = async (data: FieldValues) => {
     console.log(data);
+
+    const toastId = toast.loading("Registering a user.....");
+
+    try {
+      const result = await signUp(data);
+
+      // * if there is error
+      if (result?.error) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const errorMsg = (result?.error as any)?.data?.errorMessages[0]
+          ?.message;
+
+        toast.error(errorMsg, {
+          id: toastId,
+          duration: 1400,
+        });
+
+        return;
+      }
+
+      // * for success sign up
+      if (result?.data?.success) {
+        toast.success(result?.data?.message, {
+          id: toastId,
+          duration: 1400,
+        });
+
+        navigate("/login");
+      }
+    } catch (error) {
+      toast.error("Something went wrong!! ", { id: toastId, duration: 1400 });
+      console.log(error);
+    }
+
+    //
   };
 
   return (
