@@ -9,7 +9,7 @@ const ChatMessage = () => {
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
+console.log(isLoading)
   const handleInputChange = (e: any) => {
     setInput(e.target.value);
   };
