@@ -1,5 +1,5 @@
 import App from "@/App";
-import { HomePage, Login, SignUp } from "@/pages";
+import { ChatMessage, HomePage, Login, SignUp } from "@/pages";
 import { createBrowserRouter } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -18,6 +18,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <HomePage />,
+      },
+      {
+        path: "/message",
+        element: <ChatMessage />,
       },
     ],
   },

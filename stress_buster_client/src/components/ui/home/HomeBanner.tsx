@@ -1,7 +1,7 @@
 import Wrapper from "@/components/shared/Wrapper";
 import { Button } from "../button";
 
-import bannerImg from "@/assets/bannerImg.jpg";
+import bannerImg2 from "@/assets/bannerImg2.jpg";
 
 const HomeBanner = () => {
   return (
@@ -23,7 +23,8 @@ const HomeBanner = () => {
           {/* button section  */}
           <div className="buttonSection">
             <Button className=" text-xl bg-prime100 hover:bg-prime100   ">
-              Start tracking
+              Chat with us...
+              <div className=" h-[.8rem] w-[.08rem] bg-gray-100 animate-ping rounded-md"></div>
             </Button>
           </div>
 
@@ -33,7 +34,7 @@ const HomeBanner = () => {
 
         {/* banner right section  */}
         <div className="bannerRight  w-[50%]   ">
-          <img src={bannerImg} className=" h-[28rem] w-full " alt="" />
+          <img src={bannerImg2} className="  " alt="" />
         </div>
       </Wrapper>
     </div>
