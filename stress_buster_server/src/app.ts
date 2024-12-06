@@ -1,38 +1,43 @@
-import cors from 'cors'
-import 'dotenv/config'
-import express, { Application, NextFunction, Request, Response } from 'express'
-import * as path from 'path'
-import routes from './app/routes'
+import express, { Application, NextFunction, Request, Response } from "express";
+import cors from "cors";
+import morgan from "morgan";
 
-// import routes here
-import globalErrorHandler from './errors/globalErrorHandler'
-import { dbConnect } from './utils/dbConnect'
-const app: Application = express()
+import globalErrorHandler from "./app/middleware/globalErrorHandler";
+import { MainRouter } from "./app/router";
+import cookieParser from "cookie-parser";
+import httpStatus from "http-status";
 
-app.use(cors())
+const app: Application = express();
 
-// Set EJS as the view engine
-app.set('view engine', 'ejs')
+app.use(express.json());
+app.use(cors());
+app.use(morgan("dev"));
+app.use(cookieParser());
 
-// Set the path to the views directory
-app.set('views', path.join(__dirname, '../views'))
+// ! rouutes
+app.use("/api", MainRouter);
 
-//parser
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+app.get("/", async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    res.send({ message: "server is running  !! " });
+  } catch (error) {
+    next(error);
+  }
+});
 
-// Database connection
-dbConnect()
+//! global error handler
+app.use(globalErrorHandler);
 
-// Application routes
-app.use('/api/v1/', routes)
+// ! not found route
+app.use((req: Request, res: Response, next: NextFunction) => {
+  res.status(httpStatus.NOT_FOUND).json({
+    success: false,
+    message: "API NOT FOUND!",
+    error: {
+      path: req.originalUrl,
+      message: "Your requested path is not found!",
+    },
+  });
+});
 
-//Welcome route
-app.get('/', async (req: Request, res: Response, next: NextFunction) => {
-  res.render('welcome')
-})
-
-// Error handling
-app.use(globalErrorHandler)
-
-export { app }
+export default app;

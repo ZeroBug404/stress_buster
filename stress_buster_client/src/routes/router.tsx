@@ -1,9 +1,12 @@
 import App from "@/App";
-import { HomePage, Login, SignUp } from "@/pages";
-import ChartAndSuggestion from "@/pages/ChartAndSuggestion"
+import {
+  ChartAndSuggestion,
+  ChatMessage,
+  HomePage,
+  Login,
+  SignUp,
+} from "@/pages";
 import { createBrowserRouter } from "react-router-dom";
-
-
 
 const router = createBrowserRouter([
   {
@@ -23,9 +26,13 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path:"/questions",
-        element:<ChartAndSuggestion />
-      }
+        path: "/message",
+        element: <ChatMessage />,
+      },
+      {
+        path: "/questions",
+        element: <ChartAndSuggestion />,
+      },
     ],
   },
 ]);
