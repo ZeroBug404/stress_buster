@@ -1,20 +1,20 @@
 import { NextFunction, Request, Response } from 'express'
 
 import sendResponse from '../../../utils/responseHandler'
-import { stateServices } from './state.service'
+import { MoodServices } from './mood.service'
 
-const getAllStates = async (
+const getAllMoods = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const result = await stateServices.getStates()
+    const result = await MoodServices.getMoods()
     // console.log(result)
     sendResponse(res, {
       statusCode: 200,
       success: true,
-      message: 'Successfully fetched all states',
+      message: 'Successfully fetched all modds',
       data: result,
     })
   } catch (error) {
@@ -22,4 +22,4 @@ const getAllStates = async (
   }
 }
 
-export const statesControllers = { getAllStates }
+export const MoodControllers = { getAllMoods }
