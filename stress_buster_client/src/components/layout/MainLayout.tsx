@@ -11,15 +11,22 @@ export const MainLayout = () => {
       {/* nav ends */}
 
       {/* child component  */}
-      <div className="childComponent mt-[3.6rem]   ">
+      <div className="childComponent mt-[4rem]   ">
         <Outlet />
       </div>
       {/* child component  */}
 
-      <div className="footerContainer   ">
-        {/* <Footer /> */}
-        <h1>footer</h1>
-        <h1>footer</h1>
+      <div className="footerContainer  py-3  ">
+        <div className="footerTop flex items-center justify-center gap-2 mb-2  ">
+          <p>Terms of Service</p>
+
+          <p>|</p>
+
+          <p>Privacy Policy</p>
+        </div>
+
+        <p className=" text-center ">Copyright © 2024</p>
+        <p className=" text-center ">ALL RIGHTS RESERVED</p>
       </div>
     </div>
   );
