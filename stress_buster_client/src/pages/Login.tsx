@@ -12,6 +12,7 @@ import { verifyToken } from "@/utils/verifyToken";
 import { TUser } from "@/types/globalTypes";
 import { useAppDispatch } from "@/redux/hook";
 import { setUser } from "@/redux/features/auth/auth.slice";
+import { FaGoogle } from "react-icons/fa";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -96,12 +97,20 @@ const Login = () => {
 
               <Button
                 // disabled={isLoading}
-                className={`px-3 xsm:px-4 sm:px-5 md:px-6 font-semibold text-xs sm:text-sm md:text-base  active:scale-95 duration-500  `}
+                className={`px-3 xsm:px-4 sm:px-5 md:px-6 font-semibold text-xs sm:text-sm md:text-base  active:scale-95 duration-500  bg-prime100 hover:bg-prime100 `}
               >
                 Log in
               </Button>
             </ReimentForm>
             {/* form ends */}
+
+            <div className="gogoleLogin mt-4  ">
+              <Button
+                className={`px-3 xsm:px-4 sm:px-5 md:px-6 font-semibold text-xs sm:text-sm md:text-base  active:scale-95 duration-500  bg-prime100 hover:bg-prime100 `}
+              >
+                Log in with Google <FaGoogle />
+              </Button>
+            </div>
 
             <div className="forgotPassword  mt-2  font-semibold underline cursor-pointer text-blue-800 dark:text-blue-500  ">
               <Link to={"/forgotPassword"}>forgot password</Link>
