@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export type TUser = {
   userId: string;
   userEmail: string;
@@ -5,4 +7,11 @@ export type TUser = {
   role: string;
   iat: number;
   exp: number;
+};
+
+export type TService = {
+  id: number;
+  icon: ReactNode;
+  heading: string;
+  titleText: string;
 };

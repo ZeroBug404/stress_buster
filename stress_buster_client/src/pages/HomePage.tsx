@@ -2,7 +2,7 @@ import { HomeBanner, Services } from "@/components/ui/home";
 
 const HomePage = () => {
   return (
-    <div className="HomePageContainer">
+    <div className="HomePageContainer  ">
       <HomeBanner />
       <Services />
     </div>

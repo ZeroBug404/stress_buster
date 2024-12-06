@@ -5,7 +5,7 @@ import bannerImg from "@/assets/bannerImg.jpg";
 
 const HomeBanner = () => {
   return (
-    <div className="HomeBannerContainer">
+    <div className="HomeBannerContainer py-10 ">
       <Wrapper className=" homeBannerWrapper  flex justify-between items-center gap-x-4  ">
         {/* banner left section  */}
         <div className="bannerLeft flex flex-col gap-y-8 w-[50%] ">
