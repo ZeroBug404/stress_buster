@@ -14,7 +14,9 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({ onSubmit }) => {
     gratitude: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setAnswers({ ...answers, [e.target.name]: e.target.value });
   };
 
@@ -26,12 +28,18 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({ onSubmit }) => {
         onSubmit(answers);
       }}
     >
-      <h2 className="text-2xl font-bold text-gray-800 text-center">Mood Tracker</h2>
-      <p className="text-gray-600 text-center">Answer the questions to track your mood and well-being.</p>
+      <h2 className="text-2xl font-bold text-gray-800 text-center">
+        Mood Tracker
+      </h2>
+      <p className="text-gray-600 text-center">
+        Answer the questions to track your mood and well-being.
+      </p>
 
       <div className="space-y-4">
         <label className="block">
-          <span className="text-gray-700 font-medium">How happy are you today? (1-10)</span>
+          <span className="text-gray-700 font-medium">
+            How happy are you today? (1-10)
+          </span>
           <input
             type="number"
             name="happiness"
@@ -44,7 +52,9 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({ onSubmit }) => {
         </label>
 
         <label className="block">
-          <span className="text-gray-700 font-medium">How stressed are you today? (1-10)</span>
+          <span className="text-gray-700 font-medium">
+            How stressed are you today? (1-10)
+          </span>
           <input
             type="number"
             name="stress"
@@ -57,7 +67,9 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({ onSubmit }) => {
         </label>
 
         <label className="block">
-          <span className="text-gray-700 font-medium">How many hours did you sleep last night?</span>
+          <span className="text-gray-700 font-medium">
+            How many hours did you sleep last night?
+          </span>
           <input
             type="number"
             name="sleep"
@@ -70,7 +82,9 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({ onSubmit }) => {
         </label>
 
         <label className="block">
-          <span className="text-gray-700 font-medium">How energetic do you feel today? (1-10)</span>
+          <span className="text-gray-700 font-medium">
+            How energetic do you feel today? (1-10)
+          </span>
           <input
             type="number"
             name="energy"
@@ -83,7 +97,9 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({ onSubmit }) => {
         </label>
 
         <label className="block">
-          <span className="text-gray-700 font-medium">How focused are you today? (1-10)</span>
+          <span className="text-gray-700 font-medium">
+            How focused are you today? (1-10)
+          </span>
           <input
             type="number"
             name="focus"
@@ -96,7 +112,9 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({ onSubmit }) => {
         </label>
 
         <label className="block">
-          <span className="text-gray-700 font-medium">What are you most grateful for today?</span>
+          <span className="text-gray-700 font-medium">
+            What are you most grateful for today?
+          </span>
           <textarea
             name="gratitude"
             value={answers.gratitude}

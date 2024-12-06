@@ -138,4 +138,88 @@ const connectWithChatBot = async (
     res.sendStatus(404)
   }
 }
-export { connectWithChatBot }
+
+const connectWithChatBotWithoutUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    console.log(req.body)
+
+    const roomId = uuid()
+
+    const websocketserverLink = `${String(
+      process.env.WEBSOCKET_SERVER
+    )}?${querystring.stringify({
+      id: roomId,
+      isServer: true,
+    })}`
+
+    const wss = new WebSocket(websocketserverLink)
+
+    wss.on('open', () => {
+      res.status(200).json({ chatId: roomId })
+      wss.send(JSON.stringify({ type: 'server:connected' }))
+    })
+
+    // Initialize a generic chat session (no user-specific history)
+    const chat = startGeminiChat([])
+
+    wss.on(
+      'message',
+      async (data: {
+        toString: () => string
+        type: string
+        prompt: string | (string | Part)[] | undefined
+      }) => {
+        try {
+          data = JSON.parse(data.toString())
+          console.log(data)
+
+          if (data?.type === 'client:prompt') {
+            if (!data.prompt) return
+
+            // Handle prompt input and generate response
+            const result = await chat.sendMessageStream(data.prompt)
+            let respText = ''
+            wss.send(JSON.stringify({ type: 'server:response:start' }))
+
+            console.log(result)
+
+            for await (const chunk of result.stream) {
+              const chunkText = chunk.text()
+              wss.send(
+                JSON.stringify({
+                  type: 'server:response:chunk',
+                  chunk: chunkText,
+                })
+              )
+              respText += chunkText
+            }
+            wss.send(JSON.stringify({ type: 'server:response:end' }))
+
+            // Optionally, log chat history for debugging
+            console.log({ prompt: data.prompt, response: respText })
+          }
+        } catch (error) {
+          console.error(error)
+        }
+      }
+    )
+
+    wss.on('close', () => {
+      console.log('WebSocket closed')
+    })
+
+    wss.on('error', error => {
+      console.error('WebSocket Error:', error.message)
+      res.sendStatus(404)
+    })
+  } catch (error) {
+    console.error(error)
+    res.sendStatus(404)
+  }
+}
+
+export { connectWithChatBot, connectWithChatBotWithoutUser }

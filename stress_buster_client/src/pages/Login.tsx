@@ -64,6 +64,9 @@ const Login = () => {
     try {
       // Await the result from LoginWithGoogle directly
       const res = await LoginWithGoogle();
+
+
+      console.log(res.data)
       
       if (res.success) {
         console.log("Login successful:", res.data);

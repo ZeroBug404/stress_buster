@@ -2,18 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 import { Chat } from "@/components/ui/Message";
 
-function LoaderRipple() {
-  return (
-    <div className="relative w-16 h-16">
-      <div className="absolute top-0 left-0 w-full h-full border-4 border-white border-opacity-75 rounded-full animate-pulse"></div>
-      <div className="absolute top-0 left-0 w-full h-full border-4 border-white opacity-100 rounded-full animate-pulse animate-delay-1000ms"></div>
-    </div>
-  );
-}
-
 const ChatMessage = () => {
-  const navigate = useNavigate();
-
   return (
     <div className="flex flex-col h-screen bg-gradient-to-tr bg-gray-200 ">
       {/* Header */}
