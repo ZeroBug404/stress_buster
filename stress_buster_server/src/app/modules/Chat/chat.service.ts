@@ -8,25 +8,20 @@ import querystring from 'querystring'
 import { startGeminiChat } from '../../../gemini/chat'
 import chatHistModel from '../Chat/chat.model'
 import { Part } from '@google/generative-ai'
+import { NextFunction, Request, Response } from 'express'
 
 const connectWithChatBot = async (
-  req: { userId: undefined },
-  res: {
-    status: (arg0: number) => {
-      (): any
-      new (): any
-      json: { (arg0: { chatId: any }): void; new (): any }
-    }
-    sendStatus: (arg0: number) => void
-  }
-) => {
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   try {
-    if (req.userId === undefined) {
-      // through err
+    if (req.user === undefined) {
+      
       return
     }
     const foundHist = await chatHistModel
-      .find({ userId: req.userId })
+      .find({ userId: req.user })
       .sort({ timestamp: 1 })
 
     // console.log(foundHist);
@@ -117,7 +112,7 @@ const connectWithChatBot = async (
             wss.send(JSON.stringify({ type: 'server:response:end' }))
             // should be stored in the db
             await chatHistModel.create({
-              userId: req.userId,
+              userId: req.user,
               prompt: data.prompt,
               response: respText,
             })
@@ -139,4 +134,4 @@ const connectWithChatBot = async (
     res.sendStatus(404)
   }
 }
-module.exports = { connectWithChatBot }
+export { connectWithChatBot }
