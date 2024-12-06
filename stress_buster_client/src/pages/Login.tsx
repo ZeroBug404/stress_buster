@@ -1,3 +1,4 @@
+
 import { ReimentForm, ReimentInput } from "@/components/form";
 import Wrapper from "@/components/shared/Wrapper";
 import { Button } from "@/components/ui/button";
@@ -13,13 +14,15 @@ import { TUser } from "@/types/globalTypes";
 import { useAppDispatch } from "@/redux/hook";
 import { setUser } from "@/redux/features/auth/auth.slice";
 import { FaGoogle } from "react-icons/fa";
+import { LoginWithGoogle } from "../firebase/firebase";
+
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [logIn, { isLoading }] = useLogInMutation();
 
-  // ! for login
+
   const handleLogin = async (data: FieldValues) => {
     const { email, password } = data;
 
@@ -57,6 +60,24 @@ const Login = () => {
     }
   };
 
+  const handleLoginWithGoogle = async () => {
+    try {
+      // Await the result from LoginWithGoogle directly
+      const res = await LoginWithGoogle();
+      
+      if (res.success) {
+        console.log("Login successful:", res.data);
+        // You can handle the successful login here (e.g., redirect, store user data, etc.)
+      } else {
+        console.log("Login failed:", res.message);
+        // Handle failed login (e.g., show an error message to the user)
+      }
+    } catch (error) {
+      // Handle any unexpected errors
+      console.error("Error during login:", error);
+    }
+  };
+  
   return (
     <>
       {isLoading && <FormSubmitLoading />}
@@ -104,9 +125,11 @@ const Login = () => {
             </ReimentForm>
             {/* form ends */}
 
-            <div className="gogoleLogin mt-4  ">
+            <div className="gogoleLogin mt-4">
               <Button
                 className={`px-3 xsm:px-4 sm:px-5 md:px-6 font-semibold text-xs sm:text-sm md:text-base  active:scale-95 duration-500  bg-prime100 hover:bg-prime100 `}
+
+                onClick={handleLoginWithGoogle}
               >
                 Log in with Google <FaGoogle />
               </Button>
