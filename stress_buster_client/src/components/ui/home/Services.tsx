@@ -38,7 +38,7 @@ const ServicesProvider = [
 
 const Services = () => {
   return (
-    <div className="ServicesContainer  py-10 ">
+    <div className="ServicesContainer  py-8 ">
       <Wrapper className="  serviceWrapper bg-gray-100 p-6 rounded-md   ">
         <div className="servicesCardContent grid grid-cols-2 gap-x-10 gap-y-16 ">
           {ServicesProvider &&

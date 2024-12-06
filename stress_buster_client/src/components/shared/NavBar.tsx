@@ -92,7 +92,7 @@ const Navbar = () => {
         {/* right button section  */}
         <div className="buttonSection  md:ml-5 lg:ml-8  flex  items-center gap-x-0.5  ">
           {!userInfo ? (
-            <Link to={"/"}>
+            <Link to={"/login"}>
               <Button className=" -z-[1] text-xs sm:text-sm md:text-base bg-prime50 hover:bg-prime100 ">
                 Sign in
               </Button>
