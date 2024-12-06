@@ -1,6 +1,9 @@
 import App from "@/App";
 import { HomePage, Login, SignUp } from "@/pages";
+import ChartAndSuggestion from "@/pages/ChartAndSuggestion"
 import { createBrowserRouter } from "react-router-dom";
+
+
 
 const router = createBrowserRouter([
   {
@@ -19,6 +22,10 @@ const router = createBrowserRouter([
         path: "/",
         element: <HomePage />,
       },
+      {
+        path:"/questions",
+        element:<ChartAndSuggestion />
+      }
     ],
   },
 ]);
